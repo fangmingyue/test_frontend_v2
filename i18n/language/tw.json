@@ -5,7 +5,17 @@
   "name": "姓名",
   "age": "年齡",
   "edit": "修改",
+  "editInfo": "修改資料",
   "add": "新增",
   "del": "刪除",
-  "clear": "重置"
+  "clear": "重置",
+  "tipAge": "請輸入年齡",
+  "tipName": "請輸入名字",
+  "editAsk": "修改詢問",
+  "editSure": "確定要修改?",
+  "cancel": "取消",
+  "addAsk": "新增詢問",
+  "addSure": "確定要新增?",
+  "delAsk": "刪除詢問",
+  "delSure": "確定要刪除"
 }

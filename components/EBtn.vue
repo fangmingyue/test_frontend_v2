@@ -26,7 +26,7 @@ const btnClass = computed(() => `e-btn-${props.color}`)
   border: none;
   padding: 4px 8px;
   font-size: 16px;
-  width: 60px;
+  width: 70px;
   &:hover {
     filter: brightness(1.2);
   }
@@ -43,7 +43,7 @@ const btnClass = computed(() => `e-btn-${props.color}`)
   border: none;
   padding: 4px 8px;
   font-size: 16px;
-  width: 60px;
+  width: 70px;
   &:hover {
     filter: brightness(1.2);
   }
@@ -60,7 +60,7 @@ const btnClass = computed(() => `e-btn-${props.color}`)
   border: none;
   padding: 4px 8px;
   font-size: 16px;
-  width: 60px;
+  width: 70px;
   &:hover {
     filter: brightness(1.2);
   }

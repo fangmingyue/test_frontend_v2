@@ -5,7 +5,17 @@
   "name": "Name",
   "age": "Age",
   "edit": "Edit",
+  "editInfo": "Edit information",
   "add": "Add",
   "del": "Delete",
-  "clear": "Clear"
+  "clear": "Clear",
+  "tipAge": "Please enter your age",
+  "tipName": "Please enter your name",
+  "editAsk": "Edit ask",
+  "editSure": "Are you sure to edit?",
+  "cancel": "Cancel",
+  "addAsk": "Add ask",
+  "addSure": "Are you sure to add?",
+  "delAsk": "Delete ask",
+  "delSure": "Are you sure to delete?"
 }

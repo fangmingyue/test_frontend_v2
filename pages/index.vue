@@ -5,6 +5,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { getUserList, postUserList, delUserList, putUserList } from '@/protocal/api/user'
 import EBtn from '@/components/EBtn.vue'
 import ETextField from '@/components/ETextField.vue'
+import { rule } from 'postcss'
 // !資料 --------------------------------------------------------------------------------------------
 const { t, locale } = useI18n()
 
@@ -66,9 +67,9 @@ const rules = reactive<FormRules<RuleForm>>({
           return callback(new Error('年齡必須是數字'))
         }
 
-        // 檢查範圍（不能為0）
-        if (value === 0) {
-          return callback(new Error('年齡不能為 0'))
+        // 檢查範圍（不能小於或等於 0）
+        if (value <= 0) {
+          return callback(new Error('年齡不能小於或等於 0'))
         }
         // 檢查範圍（例如最多三位數）
         if (value > 999) {
@@ -99,13 +100,13 @@ const rules1 = reactive<FormRules<FormData>>({
           return callback(new Error('年齡必須是數字'))
         }
 
-        // 檢查範圍（不能為0）
-        if (value === 0) {
-          return callback(new Error('年齡不能為 0'))
+        // 檢查範圍（不能小於或等於 0）
+        if (value <= 0) {
+          return callback(new Error('年齡不能小於或等於 0'))
         }
         // 檢查範圍（例如最多三位數）
-        if (value > 999) {
-          return callback(new Error('年齡不能超過 3 位數'))
+        if (value > 130) {
+          return callback(new Error('年齡不能超過130歲'))
         }
 
         callback() // 通過驗證
@@ -117,13 +118,16 @@ const rules1 = reactive<FormRules<FormData>>({
 
 const language = [
   { label: '繁體中文', value: 'zh-TW' },
-  { label: '英文', value: 'en-US' },
+  { label: 'English', value: 'en-US' },
 ]
 
 // !接收事件 -----------------------------------------------------------------------------------------
 // 切換語系
-const switchLocale = (lang: 'zh-TW' | 'en-US') => {
+const switchLocale = async (lang: 'zh-TW' | 'en-US') => {
   locale.value = lang
+  ruleForm.name = ''
+  ruleForm.age = 0
+  ruleFormRef.value?.clearValidate()
 }
 
 // 操作列表清空
@@ -136,7 +140,7 @@ const clearOperateList = () => {
 // 操作新增詢問
 const operateAddAsk = async () => {
   try {
-    await ElMessageBox.confirm(`確定要新增?`, '新增詢問', {
+    await ElMessageBox.confirm('確定要新增?', '新增詢問', {
       confirmButtonText: '新增',
       cancelButtonText: '取消',
       type: 'warning',
@@ -171,7 +175,7 @@ const opentEditDialog = (row: any) => {
 // 修改詢問
 const operateEditAsk = async () => {
   try {
-    await ElMessageBox.confirm(`確定要修改?`, '修改詢問', {
+    await ElMessageBox.confirm('確定要修改?', '修改詢問', {
       confirmButtonText: '修改',
       cancelButtonText: '取消',
       type: 'warning',
@@ -200,7 +204,7 @@ const operateEditForm = async () => {
 // 列表刪除詢問
 const memberDelAsk = async (name: string) => {
   try {
-    await ElMessageBox.confirm(`確定要刪除【${name}】?`, '刪除詢問', {
+    await ElMessageBox.confirm('確定要刪除?', '刪除詢問', {
       confirmButtonText: '刪除',
       cancelButtonText: '取消',
       type: 'warning',
@@ -240,6 +244,8 @@ const ApiPostUserList = async () => {
       message: '新增成功',
       type: 'success',
     })
+    ruleForm.name = ''
+    ruleForm.age = 0
     await ApiGetUserList()
   }
   console.log(res.data)
@@ -279,7 +285,7 @@ onMounted(() => {
 })
 // !對外事件 -----------------------------------------------------------------------------------------
 
-// !Ref 輸出 ----------------------------------------------------------------------------------------
+// !watch -------------------------------------------------------------------------------------------
 </script>
 
 <template lang="pug">
@@ -311,7 +317,7 @@ onMounted(() => {
               EBtn(color="success" @click="opentEditDialog(row)") {{ t('edit') }}
               EBtn(color="error" @click="memberClickDelete(row)") {{ t('del') }}
   //- 修改dialog
-  el-dialog(v-model="dialogTableVisible" :title="t('edit')" width="60%")
+  el-dialog(v-model="dialogTableVisible" :title="t('editInfo')" width="60%")
     el-form(ref="formDataRef" :model="formData" :rules="rules1")
       el-form-item(prop="name")
         ETextField(v-model="formData.name" :label="t('name')" type="text")
@@ -324,9 +330,9 @@ onMounted(() => {
 <style scoped lang="scss">
 #Home {
   margin-top: 80px;
-  padding: 0 20px;
+  padding: 0 20px 60px;
   @media (max-width: 768) {
-    padding: 0 16px;
+    padding: 0 16px 40px;
   }
 }
 
