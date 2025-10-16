@@ -5,7 +5,6 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { getUserList, postUserList, delUserList, putUserList } from '@/protocal/api/user'
 import EBtn from '@/components/EBtn.vue'
 import ETextField from '@/components/ETextField.vue'
-import { rule } from 'postcss'
 // !資料 --------------------------------------------------------------------------------------------
 const { t, locale } = useI18n()
 
@@ -123,8 +122,9 @@ const language = [
 
 // !接收事件 -----------------------------------------------------------------------------------------
 // 切換語系
-const switchLocale = async (lang: 'zh-TW' | 'en-US') => {
+const switchLocale = async (lang: any) => {
   locale.value = lang
+  appStore.lang = lang
   ruleForm.name = ''
   ruleForm.age = 0
   ruleFormRef.value?.clearValidate()
@@ -286,6 +286,17 @@ onMounted(() => {
 // !對外事件 -----------------------------------------------------------------------------------------
 
 // !watch -------------------------------------------------------------------------------------------
+watch(
+  () => locale.value,
+  (val) => {
+    if (val === 'zh-TW') {
+      appStore.lang = 'zh-TW'
+    } else {
+      appStore.lang = 'en-US'
+    }
+    console.log(locale)
+  }
+)
 </script>
 
 <template lang="pug">
@@ -296,7 +307,7 @@ onMounted(() => {
       el-select(v-model="appStore.lang" size="large" style="width: 120px" @change="switchLocale(appStore.lang)")
         el-option(v-for="item in language" :key="item.value" :label="item.label" :value="item.value")
     div(class="border border-solid border-[#eeeeee] p-5")
-      div(class="text-center my-8 text-2xl") {{ t('operate') }}
+      div(class="text-center my-8 text-2xl") {{ $t('operate') }}
       el-form(ref="ruleFormRef" :model="ruleForm" :rules="rules")
         el-form-item(prop="name")
           ETextField(v-model="ruleForm.name" :label="t('name')" type="text")

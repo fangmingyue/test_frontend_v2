@@ -35,31 +35,22 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      {
-        code: 'zh-TW',
-        file: 'tw.json',
-        language: 'zh-TW',
-        name: '繁體中文',
-      },
-      {
-        code: 'en-US',
-        file: 'en.json',
-        language: 'en-US',
-        name: 'English',
-      },
+      { code: 'zh-TW', file: 'tw.json', name: '繁體中文' },
+      { code: 'en-US', file: 'en.json', name: 'English' },
     ],
     lazy: true,
     langDir: 'language/',
     defaultLocale: 'zh-TW',
     strategy: 'prefix_except_default',
     detectBrowserLanguage: {
-      useCookie: true,
+      useCookie: false,
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
       alwaysRedirect: true,
       fallbackLocale: 'zh-TW',
     },
   },
+
   imports: {
     dirs: [
       // 掃描 composables 目錄頂層
