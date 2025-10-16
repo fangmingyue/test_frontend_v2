@@ -1,11 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'url'
+import VueI18nVitePlugin from '@intlify/unplugin-vue-i18n/vite'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-
+  build: {
+    transpile: [/vue-i18n/],
+  },
   modules: [
-    '@nuxtjs/i18n',
     '@pinia/nuxt',
     '@nuxt/image',
     '@unocss/nuxt',
@@ -30,24 +34,6 @@ export default defineNuxtConfig({
           quality: 75, // 設定品質
         },
       },
-    },
-  },
-
-  i18n: {
-    locales: [
-      { code: 'zh-TW', file: 'tw.json', name: '繁體中文' },
-      { code: 'en-US', file: 'en.json', name: 'English' },
-    ],
-    lazy: true,
-    langDir: 'language/',
-    defaultLocale: 'zh-TW',
-    strategy: 'prefix_except_default',
-    detectBrowserLanguage: {
-      useCookie: false,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-      alwaysRedirect: true,
-      fallbackLocale: 'zh-TW',
     },
   },
 
@@ -104,6 +90,16 @@ export default defineNuxtConfig({
         },
       },
     },
+    resolve: {
+      alias: {
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js',
+      },
+    },
+    plugins: [
+      VueI18nVitePlugin({
+        include: [resolve(dirname(fileURLToPath(import.meta.url)), './locales/*.json')],
+      }),
+    ],
   },
   nitro: {
     devProxy: {

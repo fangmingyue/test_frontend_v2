@@ -1,4 +1,9 @@
 export const useAppStore = defineStore('appStore', () => {
-  const lang = ref('zh-TW')
-  return { lang }
+  interface UserList {
+    id: number
+    name: string
+    age: number
+  }
+  const memberList = ref<any>()
+  return { memberList }
 })

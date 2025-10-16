@@ -17,5 +17,14 @@
   "addAsk": "新增詢問",
   "addSure": "確定要新增?",
   "delAsk": "刪除詢問",
-  "delSure": "確定要刪除"
+  "delSure": "確定要刪除",
+  "addScuccess": "新增成功",
+  "updateScuccess": "更新成功",
+  "delScuccess": "刪除成功",
+  "typeId": "請輸入ID",
+  "typeName": "請輸入名字",
+  "typeAge": "請輸入年齡",
+  "ageNumber": "年齡必須是數字",
+  "ageUnder": "年齡不能小於或等於０",
+  "ageOver": "年齡不能大於130歲"
 }

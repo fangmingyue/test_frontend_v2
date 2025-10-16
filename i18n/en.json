@@ -17,5 +17,14 @@
   "addAsk": "Add ask",
   "addSure": "Are you sure to add?",
   "delAsk": "Delete ask",
-  "delSure": "Are you sure to delete?"
+  "delSure": "Are you sure to delete?",
+  "addScuccess": "Add success",
+  "updateScuccess": "Update success",
+  "delScuccess": "Delete success",
+  "typeId": "Please enter ID",
+  "typeName": "Please enter name",
+  "typeAge": "Please enter age",
+  "ageNumber": "Age must be a number",
+  "ageUnder": "Age cannot be less than or equal to 0",
+  "ageOver": "Age cannot be greater than 130"
 }
