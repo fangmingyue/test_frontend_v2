@@ -104,7 +104,8 @@ export default defineNuxtConfig({
   nitro: {
     devProxy: {
       '/api': {
-        target: `${process.env.NUXT_PUBLIC_API_BASE as string}/api`, // 這裡是接口地址
+        // target: `${process.env.NUXT_PUBLIC_API_BASE as string}/api`, // 這裡是接口地址
+        target: 'https://58316.wu.elitepro.ltd/api', // 這裡是接口地址
         changeOrigin: true,
         prependPath: true,
       },
